@@ -116,7 +116,7 @@ function onYouTubeIframeAPIReady() {
                     var formattedData = {
                         "type": "Feature",
                         "properties": {
-                            "description": "<table style='line-height: 1.8'><tr><td><p style='font-size:16px; font-weight:bold'>" + name + "</p></td></tr><tr><td><a href='mailto:" + contact + "'>" + contact + "</a></td></tr><tr><td><em>" + desc + "</em></td></tr><tr><td><div id='ytPlayer" + childSnapshot.key + "'></div></td></tr></table>",
+                            "description": "<table><tr><td><p style='font-size:16px; font-weight:bold; margin-bottom: 0px'>" + name + "</p></td></tr><tr><td><a href='mailto:" + contact + "'>" + contact + "</a></td></tr><tr><td><em>" + desc + "</em></td></tr><tr><td><div id='ytPlayer" + childSnapshot.key + "'></div></td></tr></table>",
                             "icon": "theatre"
                         },
                         "geometry": {
@@ -176,7 +176,7 @@ function onYouTubeIframeAPIReady() {
                 .addTo(map);
 
             //Creates a YouTube video iFrame in each popup when it is clicked, using the videoID for that popup
-            ytVideo.forEach(function (element) {
+            ytVideos.forEach(function (element) {
                 player = new YT.Player((element.key), {
                     height: '100%',
                     width: '100%',

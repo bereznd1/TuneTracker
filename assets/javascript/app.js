@@ -193,7 +193,7 @@ function onYouTubeIframeAPIReady() {
         // Changes it back to a pointer when it leaves.
         map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
-        });
+        });   
 
 
     });

@@ -1,0 +1,135 @@
+@font-face {
+    font-family: "Intro";
+    src: url("../fonts/Intro Inline.otf");
+}
+
+
+#headertext{
+    text-align: center;
+    font-family: 'VT323';
+    font-size: 26px;
+    color:lightseagreen;
+
+}
+
+.header{
+    text-align:center;
+    font-family: "Monofett";
+    font-size: 100px;
+    color:skyblue;
+    background-image: url("../images/round.png");
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h1{
+    line-height:2px;
+}
+
+#upload{
+    width:100px;
+    height:50px;
+    z-index: 10;
+}
+
+.alert{
+    text-align:center;
+}
+
+.text-center{
+    display:inline;
+    text-align:center;
+    font-size: 100px;
+}
+
+/* body{
+    background-color:lightgrey;
+    margin: 0;
+    padding: 0;
+} */
+
+.radar{
+    height:100px;
+    width:100px;
+    margin-bottom:18px;
+}
+
+.btn, #upload{
+    font-family: 'VT323';
+    background-color:lightseagreen;
+    padding:5px 5px 5px 5px;
+    font-size:20px;
+    margin-left:15px;
+    border-style: groove;
+    border-width: 4px;
+    border-color:black;
+}
+
+.btn:hover, #upload:hover{
+    opacity:50%;
+    background-color:seagreen;
+}
+
+.btn:active, #upload:active{
+    background-color:seagreen;
+}
+
+form{
+    background-color:skyblue;
+    font:'helvetica';
+    padding:10px 10px 10px 10px;
+    border-style:solid;
+    border-width: 4px;
+    border-color:black; 
+}
+#formy, .btn{
+    width:50%;
+    margin-left:25%;
+    margin-bottom:5px;
+}
+
+#instructions {
+    color: #ffffff;
+    font-weight: 900;
+    text-align: center;
+    font-size: 24px;    
+    font-family: "Intro";
+}
+
+#map{
+    /* top: 0;
+    bottom: 0; */
+    width: 100%;
+    min-height: 385px;
+    margin-top: 2px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+  }
+
+
+
+@media screen and (max-width: 980px) {
+    #map {
+        height: 550px;
+    }
+
+}
+
+
+@media screen and (max-width: 768px) {
+    #map {
+        height: 950px;
+    }
+
+}
+
+
+  
+.mapboxgl-popup {
+    max-width: 100%;
+}
+
+.mapboxgl-popup-content {
+    font-family: 'Open Sans', sans-serif;
+}

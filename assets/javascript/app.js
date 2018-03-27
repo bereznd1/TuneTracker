@@ -117,7 +117,7 @@ function onYouTubeIframeAPIReady() {
                         "type": "Feature",
                         "properties": {
                             "description": "<table><tr><td><p style='font-size:16px; font-weight:bold; margin-bottom: 0px'>" + name + "</p></td></tr><tr><td><a href='mailto:" + contact + "'>" + contact + "</a></td></tr><tr><td><em>" + desc + "</em></td></tr><tr><td><div id='ytPlayer" + childSnapshot.key + "'></div></td></tr></table>",
-                            "icon": "theatre"
+                            "icon": "music"
                         },
                         "geometry": {
                             "type": "Point",

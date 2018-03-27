@@ -1,11 +1,11 @@
-//Hides the form from appearing on the page upon first load
-$('#formy').hide();
-$('#successform').hide();
-$('#emptyform').hide();
-$('#badlink').hide();
-$('#bademail').hide();
+//Hides the form & errors from appearing on the page upon first load
+$("#formy").hide();
+$("#successform").hide();
+$("#emptyform").hide();
+$("#badlink").hide();
+$("#bademail").hide();
 
-//Velocity JS for animations
+//Velocity JS for animations (New JS library)
 $(".jumbotron").velocity("fadeIn", { duration: 1500 })
 $("#map").velocity("fadeIn", { duration: 2500 })
 $("#upload").velocity({ translateY: 20 }, {
@@ -44,8 +44,6 @@ $('#cancel-btn').on('click', function (event) {
 
 
 
-
-
 // Initializes Firebase
 var config = {
     apiKey: "AIzaSyC9fF0OACaRvyDOUZcLG5bX_LEUgmK6yGo",
@@ -62,8 +60,6 @@ var database = firebase.database();
 
 
 
-
-
 //Generates the map
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2hhbGlsb3dlbnM5MiIsImEiOiJjamV2bDR0aXQ3NDdrMzlvNzFjbGw1MHI4In0.Rj8983ke7W9GO3QnOLJg8A';
 var map = new mapboxgl.Map({
@@ -71,6 +67,8 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/streets-v9',
     center: [-75.1252, 39.90006],//starting position
     zoom: 9 // starting zoom
+
+//Adds geolocation feature, which users can click to navigate to their exact location    
 }).addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -81,7 +79,7 @@ var map = new mapboxgl.Map({
 
 
 var player;
-var yts = [];
+var ytVideos = [];
 function onYouTubeIframeAPIReady() {
 
     //Sets up what happens when the map loads (adding map markers & popups)
@@ -93,11 +91,8 @@ function onYouTubeIframeAPIReady() {
         //Firebase watcher, gets run every time a new child is added
         database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
-
             //Firebase watcher, is run once to be able to use the value of the response
             database.ref().once('value', function (snapshot) {
-
-                console.log("CHILD SNAPSHOT", childSnapshot);
 
                 //Runs code for each child within the overall snapshot
                 snapshot.forEach(function (childSnapshot, index) {
@@ -105,26 +100,17 @@ function onYouTubeIframeAPIReady() {
                     if (!childSnapshot.val().coords) {
                         return;
                     }
-                    console.log("child snapshot", childSnapshot.val());
 
-
-
-
-                    //Gets the relavant info for the popups from firebase
+                    //Gets the relevant info for the popups from firebase
                     var name = childSnapshot.val().name;
                     var contact = childSnapshot.val().contact;
                     var desc = childSnapshot.val().desc;
                     var coords = childSnapshot.val().coords;
                     coords = coords.split(',');
 
+                    //Converts the YouTube url into just the YouTube ID, which is necessary for using the YouTube iFrame API
                     var fileURL = childSnapshot.val().fileURL;
                     var userVideoID = getId(fileURL);
-
-
-
-                    console.log("key", childSnapshot.key);
-
-
 
                     //JSON code for Mapbox popups
                     var formattedData = {
@@ -142,15 +128,13 @@ function onYouTubeIframeAPIReady() {
                     //Adds the code for each popup to the array
                     popUps.push(formattedData);
 
-
-                    yts.push({
+                    //Adds the YouTube video ID & Firebase child key for each popup to the ytVideos array
+                    ytVideos.push({
                         key: 'ytPlayer' + childSnapshot.key,
                         videoId: userVideoID
                     });
 
                 });
-
-                console.log(popUps);
 
                 //Adds a map layer which uses the popUps array we filled up previously
                 map.addLayer({
@@ -191,7 +175,8 @@ function onYouTubeIframeAPIReady() {
                 .setHTML(description)
                 .addTo(map);
 
-            yts.forEach(function (element) {
+            //Creates a YouTube video iFrame in each popup when it is clicked, using the videoID for that popup
+            ytVideo.forEach(function (element) {
                 player = new YT.Player((element.key), {
                     height: '100%',
                     width: '100%',
@@ -213,13 +198,10 @@ function onYouTubeIframeAPIReady() {
 
     });
 
-
-
-
-
 }
 
 
+//This function is used to convert a regular YouTube video URL into the necessary YouTube video ID
 function getId(url) {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
 
@@ -232,9 +214,6 @@ function getId(url) {
     }
 
 };
-
-
-
 
 
 
@@ -253,9 +232,7 @@ $("#submit").on("click", function (event) {
     var desc = $("#user-description").val().trim();
 
 
-
-
-
+    //This function is used to validate that the URL entered is a valid YouTube URL
     function validateYouTubeUrl(url) {
         if (url != undefined || url != '') {
             var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=|\?vi=)([^#\&\?]*).*/;
@@ -270,29 +247,31 @@ $("#submit").on("click", function (event) {
     }
 
 
+    //This function is used to validate that the Email address entered is indeed an Email address
 
-    function validateEmail(email) {
-        if (email != undefined || email != '') {
-            var regExp2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            var match2 = email.match(regExp2);
-            if (match2 && match2[2].length == 11) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-    }
-
-
-
+    // function validateEmail(email) {
+    //     if (email != undefined || email != '') {
+    //         var regExp2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    //         var match2 = email.match(regExp2);
+    //         if (match2 && match2[2].length == 11) {
+    //             return true;
+    //         }
+    //         else {
+    //             return false;
+    //         }
+    //     }
+    // }
 
 
+
+
+    //If any of the form fields is blank, show the empty form alert
     if (name === "" || contact === "" || fileURL === "" || desc === "") {
         $('#emptyform').show();
         setTimeout(function () { $("#emptyform").hide(); }, 4000);
     }
 
+    //If none of the form fields is blank, but if the URL entered isn't a valid YouTube URL, show the Bad Link alert
     else if (!validateYouTubeUrl(fileURL)) {
         $('#badlink').show();
         setTimeout(function () { $("#badlink").hide(); }, 4000);
@@ -308,13 +287,12 @@ $("#submit").on("click", function (event) {
     // }
 
 
-
+    //If none of the form fields are blank & the URL is a valid YouTube URL, submit what the user entered into Firebase
     else {
 
         var x = document.getElementById("coords");
 
-
-        //Runs a function to acquire the user's coordinates when they are submitting a new post
+        // Runs a function to acquire the user's coordinates when they are submitting a new post
         function getLocation(callback) {
             if (navigator.geolocation) {
                 var lat_lng = navigator.geolocation.getCurrentPosition(function (position) {
@@ -324,7 +302,6 @@ $("#submit").on("click", function (event) {
                 });
 
             }
-
 
             else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
@@ -352,13 +329,12 @@ $("#submit").on("click", function (event) {
         $("#user-file").val("");
         $("#user-description").val("");
 
-        //Hides the form & shows the upload button again
+        //Hides the form & shows the upload button again, as well as the Success Form alert
         $('#formy').hide();
         $('#map').show();
         $('#successform').show();
         setTimeout(function () { $("#successform").hide(); }, 3000);
         setTimeout(function () { $("#upload").show(); }, 3000);
-
 
 
     }

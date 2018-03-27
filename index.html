@@ -3,33 +3,42 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tune Tracker</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
     <link rel="stylesheet" href="assets/css/style.css">
+
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
-    <title>Tune Tracker</title>
+
+
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
 
-    <!--header goes here-->
+    <!--Header-->
     <div class="header">
         <h1 class="text-center">Tune Tracker</h1>
         <img class="radar" src="assets/images/trackxxx.png">
         <p id="headertext">The easy way to find local musicians</p>
     </div>
 
+
     <div class="container-fluid">
 
-
-
-
-        <!--map goes here-->
+        <!--Map container-->
         <div class="row">
-
             <div class="col-xs-2 col-md-2 col-sm-1">
             </div>
 
@@ -37,7 +46,7 @@
                 <div id="successform" class="alert alert-success" role="alert">Form Submitted Successfully!</div>
                 <p id="instructions">Refresh the page to track new tunes!</p>
                 <div id="coords"></div>
-                <div id='map'></div>
+                <div id="map"></div>
             </div>
 
             <div class="col-xs-2 col-md-2 col-sm-1">
@@ -45,9 +54,8 @@
         </div>
 
 
-        <!--upload button goes here-->
+        <!--Upload Button-->
         <div class="row">
-
             <div class="col-xs-2 col-md-2">
             </div>
 
@@ -61,23 +69,22 @@
             </div>
         </div>
 
-        <!--this holds the form. It will pop up when the upload button is clicked-->
+        <!--This holds the form. It will pop up when the upload button is clicked-->
         <div class="row">
             <div class="col-xs-12 col-md-12">
-                <!--alerts for when user submits form or fills it out incorrectly-->
-
-
                 <form role="form" id="formy">
                     <div class="form-group">
+                        <!--alerts for when user submits form or fills it out incorrectly-->
                         <div id="emptyform" class="alert alert-danger" role="alert">Please fill out form completely</div>
                         <div id="badlink" class="alert alert-danger" role="alert">Please enter a valid YouTube URL</div>
                         <div id="bademail" class="alert alert-danger" role="alert">Please enter a valid Email address</div>
+
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="user-name">
                     </div>
                     <div class="form-group">
                         <label for="contact">E-mail</label>
-                        <input type="text" class="form-control" id="user-contact" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+                        <input type="email" class="form-control" id="user-contact">
                     </div>
                     <div class="form-group">
                         <label for="file">Youtube Link</label>
@@ -88,11 +95,8 @@
                         <input type="text" class="form-control" id="user-description">
                     </div>
 
-                    <button type="submit" class="btn btn-default" id="submit">
-                        <i class="fa fa-search"></i> Submit</button>
-                    <button type="submit" class="btn btn-default" id="cancel-btn">
-                        <i class="fa fa-search"></i> Cancel</button>
-
+                    <button type="submit" class="btn btn-default" id="submit">Submit</button>
+                    <button type="submit" class="btn btn-default" id="cancel-btn">Cancel</button>
                 </form>
             </div>
         </div>

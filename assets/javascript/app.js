@@ -68,7 +68,7 @@ var map = new mapboxgl.Map({
     center: [-75.1252, 39.90006],//starting position
     zoom: 9 // starting zoom
 
-//Adds geolocation feature, which users can click to navigate to their exact location    
+    //Adds geolocation feature, which users can click to navigate to their exact location    
 }).addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -193,7 +193,7 @@ function onYouTubeIframeAPIReady() {
         // Changes it back to a pointer when it leaves.
         map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
-        });   
+        });
 
 
     });

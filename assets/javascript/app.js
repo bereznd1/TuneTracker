@@ -247,24 +247,6 @@ $("#submit").on("click", function (event) {
     }
 
 
-    //This function is used to validate that the Email address entered is indeed an Email address
-
-    // function validateEmail(email) {
-    //     if (email != undefined || email != '') {
-    //         var regExp2 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    //         var match2 = email.match(regExp2);
-    //         if (match2 && match2[2].length == 11) {
-    //             return true;
-    //         }
-    //         else {
-    //             return false;
-    //         }
-    //     }
-    // }
-
-
-
-
     //If any of the form fields is blank, show the empty form alert
     if (name === "" || contact === "" || fileURL === "" || desc === "") {
         $('#emptyform').show();
@@ -277,14 +259,6 @@ $("#submit").on("click", function (event) {
         setTimeout(function () { $("#badlink").hide(); }, 4000);
 
     }
-
-
-    // else if (!validateEmail(contact)) {
-
-    //         $('#bademail').show();
-    //         setTimeout(function () { $("#bademail").hide(); }, 4000);
-
-    // }
 
 
     //If none of the form fields are blank & the URL is a valid YouTube URL, submit what the user entered into Firebase

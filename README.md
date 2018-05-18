@@ -4,7 +4,7 @@
 
  [View Live!](https://bereznd1.github.io/TuneTracker/) 
 
-
+   
 ## Brief Description
 
 The purpose behind this app is to bring local musicians together based on their locations, to be able to contact one another and collaborate.
